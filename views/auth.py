@@ -11,8 +11,8 @@ auth_ns = Namespace('auth')
 class AuthView(Resource):
     def post(self):
         req_json = request.json
-        username = req_json('username')
-        password = req_json('password')
+        username = req_json.get('username')
+        password = req_json.get('password')
         if not all([username, password]):
             return '', 400
         tokens = auth_service.generate_tokens(username, password)
